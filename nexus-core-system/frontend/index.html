@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Data Explorer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-black text-white min-h-screen p-10 font-mono selection:bg-blue-500/30">
+    <div class="max-w-6xl mx-auto">
+<header class="mb-10 flex justify-between items-end border-b border-white/10 pb-6">
+    <div class="flex items-center gap-4">
+        <div class="p-3 bg-blue-600 rounded-2xl shadow-[0_0_20px_rgba(37,99,235,0.4)]">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 16c.5 0 1 0 1.5-.5s.5-1.5 1.5-1.5 1 .5 2 1.5 1.5 1.5 3 1.5 2-1 3-2 1.5-2 3-2 2 1 3 2 1.5 1.5 3 1.5 1.5 0 2 0"></path>
+                <path d="M7 11c.5 0 1 0 1.5-.5s.5-1.5 1.5-1.5 1 .5 2 1.5"></path>
+                <circle cx="18" cy="9" r="1"></circle>
+            </svg>
+        </div>
+        <div>
+            <h1 class="text-4xl font-black tracking-tighter leading-none">NEXUS <span class="text-blue-500 text-2xl block tracking-[0.2em]">WHALE</span></h1>
+        </div>
+    </div>
+    <div class="flex items-center gap-3">
+        <span class="w-2 h-2 rounded-full bg-green-500 animate-ping"></span>
+        <span class="text-[10px] text-green-400 font-bold uppercase tracking-[0.3em]">System Live</span>
+    </div>
+</header>
+
+        <div class="grid grid-cols-3 gap-6 mb-8">
+            <div class="glass-container p-6 rounded-3xl border-l-4 border-l-blue-500">
+                <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-1">Current Load</p>
+                <h3 class="text-4xl font-black text-white" id="kpi-current">0.00</h3>
+            </div>
+            <div class="glass-container p-6 rounded-3xl border-l-4 border-l-red-500">
+                <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-1">Peak Detected</p>
+                <h3 class="text-4xl font-black text-red-400" id="kpi-peak">0.00</h3>
+            </div>
+            <div class="glass-container p-6 rounded-3xl border-l-4 border-l-purple-500">
+                <p class="text-slate-500 text-[10px] uppercase tracking-widest mb-1">Total Logs</p>
+                <h3 class="text-4xl font-black text-purple-400" id="kpi-logs">Active</h3>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 glass-container p-8 rounded-[2.5rem] h-[400px]">
+                <canvas id="coreChart"></canvas>
+            </div>
+            
+            <div class="flex flex-col gap-6">
+                <div id="terminal-output" class="flex-1 p-6 rounded-[2.5rem] text-[10px] h-[300px] overflow-y-auto">
+                    <div>[SYSTEM] Awaiting telemetry...</div>
+                </div>
+                
+                <div class="space-y-4">
+                    <button onclick="triggerSpike()" class="w-full py-4 bg-red-900/20 border border-red-500/50 hover:bg-red-600 hover:text-white text-red-500 rounded-2xl font-black uppercase tracking-[0.2em] transition-all shadow-[0_0_20px_rgba(239,68,68,0.1)] active:scale-95">
+                        ⚠️ Simulate Spike
+                    </button>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <button id="btn-pause" onclick="togglePause()" class="py-3 bg-slate-800 border border-slate-600 hover:bg-slate-700 text-slate-300 rounded-xl font-bold text-xs uppercase tracking-widest transition-all active:scale-95">
+                            ⏸️ Pause
+                        </button>
+                        <button onclick="purgeSystem()" class="py-3 bg-orange-900/20 border border-orange-500/50 hover:bg-orange-600 hover:text-white text-orange-500 rounded-xl font-bold text-xs uppercase tracking-widest transition-all shadow-[0_0_15px_rgba(249,115,22,0.1)] active:scale-95">
+                            ☢️ Purge Data
+                        </button>
+                    </div>
+                </div>
+            </div> </div> </div> <script src="script.js"></script>
+</body>
+</html>
