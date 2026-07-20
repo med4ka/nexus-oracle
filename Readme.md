@@ -1,82 +1,66 @@
-<h1 align="center">Nexus Oracle 👁️‍🗨️</h1>
-<p align="center">
-  <i>Advanced Web3 Predictive Engine & Cyber-Terminal Dashboard.</i>
-</p>
+# Nexus Oracle
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Frontend-Next.js-black?style=for-the-badge&logo=next.js" />
-  <img src="https://img.shields.io/badge/Styling-Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css" />
-  <img src="https://img.shields.io/badge/Animations-Framer_Motion-E95420?style=for-the-badge&logo=framer" />
-  <img src="https://img.shields.io/badge/Backend-Golang-00ADD8?style=for-the-badge&logo=go" />
-</p>
+**A cyberpunk-styled crypto price dashboard with a command palette and a hidden terminal easter egg — my first Next.js project.**
 
----
+I had a lot of ideas going into this one (a "Web3 predictive engine," whale-transaction tracking, mempool visualization, an AI assistant) — most of that turned out to be bigger than what I actually got built. What's real: a live-updating price ticker dashboard styled like a hacker terminal, with genuinely fun interaction details like a command palette and a secret console.
 
-## 📌 Project Overview
+> **Being upfront about scope:** despite the original framing, there's no blockchain integration here — no on-chain data, no mempool access, no wallet connection. The backend polls a public price API (CryptoCompare) on an interval and charts the result. If you're looking for real blockchain integration in my work, see [LiquidStream](https://github.com/med4ka/liquid-stream-solana), which actually calls a deployed Solana program.
 
-**Nexus Oracle** is a high-performance Web3 market intelligence platform and cyber-terminal dashboard built to democratize access to complex, real-time decentralized data streams[cite: 2]. The ecosystem acts as a specialized data highway that intercepts live blockchain network events, monitors volatile liquidity pools, and visualizes market analytics through a centralized, high-fidelity HUD[cite: 2].
+## What's Actually Here
 
-By coupling a low-latency concurrent backend with an interactive, animated user interface, Nexus Oracle bridges the gap between raw blockchain data and actionable financial intelligence[cite: 2].
+- **Live price dashboard** — backend polls CryptoCompare for a selected coin's USD price on an interval, stores a short time-series in SQLite, frontend renders it with animated Chart.js charts
+- **Coin switching** — pick a different coin to track, resets the local history
+- **Command palette (`Ctrl+K`)** — quick navigation/actions, omni-search style
+- **Hidden terminal (`` Ctrl+` ``)** — a diagnostic console easter egg with a canvas-rendered matrix-rain effect
+- **Framer Motion throughout** — animated transitions and HUD-style micro-interactions
 
----
+## What's Not Implemented (Despite Earlier Claims)
 
-## 💡 The Problem & The Solution
+- No blockchain/Web3 data source of any kind — no dependency on `ethers`, `web3.js`, or any chain RPC client, in either the frontend or backend
+- "Whale Radar," "Mempool Visualizer," and "AI Assistant" were ideas, not built features
+- There's a `/api/spike` endpoint that injects a fake data point into the chart — useful for testing the UI, but a sign that the live data pipeline was more demo than production-grade at this stage
 
-*   **The Problem:** Raw Web3 market data is highly fragmented, nested within complex mempools, and notoriously difficult for retail traders to visualize or track without deep infrastructure access.
-*   **The Solution:** Nexus Oracle unifies live data streams into a single monorepo architecture, utilizing concurrent workers to process blockchain state dynamics and rendering them via high-performance reactive charts[cite: 2, 3].
+## Tech Stack
 
----
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js, React, Tailwind CSS, Framer Motion, Chart.js |
+| Backend | Go, Gin, SQLite |
+| Data Source | CryptoCompare public price API |
 
-## ⚡ System Capabilities
-
-*   **⌨️ Command Palette (`Ctrl+K`):** Integrated omni-search navigation hub engineered for instant system overrides, routing operations, and seamless UI protocol access[cite: 3].
-*   **🖥️ Root Hacker Terminal (`Ctrl+~`):** A hidden developer diagnostic console featuring a custom matrix-style rain canvas and simulated glitch hardware rendering[cite: 3].
-*   **📡 Ghost Sockets:** Low-latency pipeline conducting real-time sonar interception of massive on-chain Whale transactions powered by AI anomaly detection models[cite: 3].
-*   **📊 Whale Radar & Mempool Visualizer:** Deep-mempool scanning engine built to map out pending block transactions and liquidity routing behaviors before block confirmation[cite: 3].
-*   **🤖 Oracle A.I. Assistant:** A context-aware market intelligence conversational chatbot integrated directly into the dashboard HUD to provide instant asset diagnostics[cite: 2, 3].
-*   **🔒 The Degen Vault:** High-frequency sentimental tracking module displaying live market volatility metrics and risk indicators for altcoins[cite: 3].
-
----
-
-## 📸 Command Center Interface
-
-<table>
-  <tr>
-    <td align="center"><b>Main Dashboard & HUD</b></td>
-    <td align="center"><b>Advanced Analytics & Terminal</b></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="assets/nexus1.png" width="100%" alt="Nexus Dashboard 1"/></td>
-    <td align="center"><img src="assets/nexus2.png" width="100%" alt="Nexus Analytics 2"/></td>
-  </tr>
-</table>
-
----
-
-## 🛠️ Monorepo Architecture
-
-This ecosystem is structured as an isolated Monorepo to unify the client-side interaction layers with the predictive backend system engines[cite: 3]:
-
-*   **`/nexus-oracle-frontend`** — The Next.js client application featuring heavy Framer Motion web animations, Chart.js multi-dataset integrations, and highly specialized custom system state hooks[cite: 2, 3].
-*   **`/nexus-core-system`** — The high-concurrency Golang API engine handling predictive math logic, real-time transaction spikes, state overriding protocols, and automatic cache-purging systems[cite: 2, 3].
-
----
-
-## 🚀 Local Development Setup
+## Getting Started
 
 ### Prerequisites
-* Node.js v18+ & npm
-* Go 1.20+
+- Node.js 18+
+- Go 1.20+
 
-#### Backend Installation
+### Backend
 
-cd nexus-core-system
+```bash
+cd nexus-core-system/backend
 go mod download
 go run main.go
+```
 
-### Frontend Installation
+### Frontend
 
+```bash
 cd nexus-oracle-frontend
 npm install
 npm run dev
+```
 
+## Project Structure
+
+```
+nexus-oracle/
+├── nexus-core-system/
+│   └── backend/
+│       └── main.go       # price polling loop + SQLite storage
+└── nexus-oracle-frontend/
+    └── ...                # Next.js dashboard, command palette, terminal easter egg
+```
+
+---
+
+*My first Next.js project. Built with Next.js, Go, and probably too many ideas at once.*
